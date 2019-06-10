@@ -16,6 +16,7 @@ library(diagram)
 library(DiagrammeR)
 library(DT)
 library(forecast)
+library(R6)
 
 
 ui <- dashboardPage(
@@ -26,6 +27,8 @@ ui <- dashboardPage(
     sidebarMenu(
       menuItem("Home", tabName = "tab_home", icon = icon("home")),
       menuItem("Showcase", tabName = "tab_1000", icon = icon("line-chart")),
+      menuItem("Showcase 2", tabName = 'tab_forecasting', icon = icon('balance-scale')
+    ),
       
       # Finance
       menuItem(
@@ -41,12 +44,8 @@ ui <- dashboardPage(
           "ALE Accounting",
           tabName = 'tab_aleacclunting',
           icon = icon('balance-scale')
-        ),
-        menuItem(
-          "Forecasts",
-          tabName = 'tab_forecasting',
-          icon = icon('balance-scale')
         )
+        
       ),
       # Operations
       menuItem(
@@ -107,7 +106,8 @@ ui <- dashboardPage(
   dashboardBody(tabItems(
     source('modules/_home/ui.R', local = environment())$value,
     source('modules/1000//ui.R', local = environment())$value,
-    source('modules/1001//ui.R', local = environment())$value
+    source('modules/1001//ui.R', local = environment())$value,
+    source('modules/1002//ui.R', local = environment())$value
   ))
   
 )
@@ -115,4 +115,6 @@ ui <- dashboardPage(
 shinyApp(ui = ui, server = function(input, output, session) {
   source('modules/1000//server.R', local = environment())$value
   source('modules/1001//server.R', local = environment())$value
+  source('modules/1002//server.R', local = environment())$value
+  
 })
